@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import MissionCounter from './components/MissionCounter';
 import BackgroundImage from './components/BackgroundImage';
+import VoteCounter from './components/VoteCounter'
 
 const styles = StyleSheet.create({
   container: {
@@ -21,7 +22,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
 export default class App extends React.Component {
   render() {
     const missionCounts = [2, 3, 4, -4, 5]
@@ -32,6 +32,8 @@ export default class App extends React.Component {
         <View style={styles.missionRow}>
           { missionCounts.map((i) => <MissionCounter key={ `mission${i}` } count={i}/>) }
         </View>
+
+        <VoteCounter />
       </View>
     );
   }
