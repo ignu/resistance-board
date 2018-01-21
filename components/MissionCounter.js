@@ -14,6 +14,10 @@ const styles = StyleSheet.create({
     padding: 20,
     color: '#fff',
     fontSize: 40,
+    fontWeight: 'bold',
+    textShadowColor: "#848",
+    textShadowRadius: 3,
+    textShadowOffset: { height: 1, width: 1 },
     margin: 20
   },
 });
