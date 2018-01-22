@@ -39,8 +39,8 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <BackgroundImage />
 
-
         <View><Text style={styles.spyCount}>{store.numberOfPlayers} Players | {store.spies} Spies</Text></View>
+
         <View style={styles.missionRow}>
           { store.rounds.map((i, y) => <MissionCounter key={ `mission${y}` } count={i}/>) }
         </View>

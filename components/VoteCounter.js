@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
+import store from '../store/index'
+import { observer } from 'mobx-react'
 
 const style = {
   container: {
@@ -23,29 +25,35 @@ const style = {
     backgroundColor: 'rgba(3, 3, 3, 0.3)',
     marginLeft: 10
   },
-  activeVote: {
-    backgroundColor: 'rgba(3, 3, 3, 0.9)',
-    
+  completeVote: {
+    backgroundColor: 'rgba(3, 3, 3, 0.92)',
   },
   finalVote: {
     backgroundColor: 'rgba(113, 3, 3, 0.3)',
   }
 }
-const VoteCounter = () => {
-  return (
-    <View style={style.container}>
-      <View style={{
-        flex: 1,
-        flexDirection: "row"
-      }}>
-        <View style={[style.vote, style.activeVote]}/>
-        <View style={style.vote}/>
-        <View style={style.vote}/>
-        <View style={style.vote}/>
-        <View style={[style.vote, style.finalVote]}/>
-      </View>
-    </View>
-  )
-}
 
-export default VoteCounter
+@observer
+export default class VoteCounter extends React.Component {
+  render() {
+    if (store.voteCount == 5) alert("Resistance Loses")
+    return (
+      <TouchableOpacity style={style.container} onPress={() => store.voteCount = store.voteCount+1}>
+        <View style={{
+          flex: 1,
+          flexDirection: "row"
+        }}>
+          {[1, 2, 3, 4, 5].map((i) => {
+            let styles = [style.vote]
+
+            if (i <= store.voteCount+1) { styles.push(style.completeVote) }
+
+            if (i == 5) { styles.push(style.finalVote) }
+
+            return <View key={`vote${i}`} style={styles}/>
+          })}
+        </View>
+      </TouchableOpacity>
+    )
+  }
+}
