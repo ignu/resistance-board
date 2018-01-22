@@ -1,8 +1,11 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import MissionCounter from './components/MissionCounter';
 import BackgroundImage from './components/BackgroundImage';
 import VoteCounter from './components/VoteCounter'
+import SelectPlayers from './components/SelectPlayers'
+import store from './store/index'
+import { observer } from 'mobx-react'
 
 const styles = StyleSheet.create({
   container: {
@@ -20,17 +23,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'rgba(0,0,0,0)'
   },
+  spyCount: {
+    color: "#fff"
+  }
 });
 
+@observer
 export default class App extends React.Component {
   render() {
-    const missionCounts = [2, 3, 4, -4, 5]
+    if (!store.numberOfPlayers) {
+      return <View style={styles.container}><BackgroundImage/><SelectPlayers/></View>
+    }
 
     return (
       <View style={styles.container}>
         <BackgroundImage />
+
+
+        <View><Text style={styles.spyCount}>{store.numberOfPlayers} Players | {store.spies} Spies</Text></View>
         <View style={styles.missionRow}>
-          { missionCounts.map((i) => <MissionCounter key={ `mission${i}` } count={i}/>) }
+          { store.rounds.map((i, y) => <MissionCounter key={ `mission${y}` } count={i}/>) }
         </View>
 
         <VoteCounter />
