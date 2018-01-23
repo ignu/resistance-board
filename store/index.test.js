@@ -15,3 +15,19 @@ describe("numberOfPlayers", () => {
     expect(store.rounds).toEqual([2, 3, 2, 3, 3])
   })
 })
+
+describe("startMission", () => {
+  it("adds an empty mission object", () => {
+  });
+
+  it("sets status to waiting", () => {
+    store.startMission()
+    expect(store.status).toEqual("waiting")
+  })
+});
+
+describe("addVote", () => {
+  it("changesStatusFromWaiting", () => {
+  });
+});
+

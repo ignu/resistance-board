@@ -30,6 +30,12 @@ const playerCounts = {
 class Store {
   @observable numberOfPlayers
   @observable voteCount = 0
+  @observable missionVotes = []
+  @observable status = "voting"
+
+  startMission = () => {
+    this.status = "waiting"
+  }
 
   @computed get rounds () {
     if (!this.numberOfPlayers) return []

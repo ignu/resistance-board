@@ -1,5 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import store from '../store/index'
+import { observer } from 'mobx-react'
+import MissionExecution from './MissionExecution'
+import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
   button: {
@@ -22,12 +25,24 @@ const styles = StyleSheet.create({
   },
 });
 
-const MissionCounter = ({count}) => {
-  return (
-    <View style={styles.button}>
-      <Text style={styles.text}>{Math.abs(count)}</Text>
-    </View>
-  )
-}
+@observer
+export default class MissionCounter extends React.Component {
+  constructor(props) {
+    super()
+    this.props = props
+  }
 
-export default MissionCounter
+ render()  {
+  const { count } = this.props
+  if (store.status == "waiting") return <MissionExecution />
+
+  return (
+    <TouchableOpacity
+      onPress={store.startMission}
+      style={styles.button}
+    >
+      <Text style={styles.text}>{Math.abs(count)}</Text>
+    </TouchableOpacity>
+  )
+ }
+}
