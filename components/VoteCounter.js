@@ -12,8 +12,8 @@ const style = {
     padding: 10,
     top: 0,
     left: 0,
-    width: '100%',
-    height: '100%'
+    width: '20%',
+    height: '20%'
   },
   voteText: {
     color: "#888"

@@ -1,7 +1,8 @@
-import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import MissionCounter from './components/MissionCounter';
-import BackgroundImage from './components/BackgroundImage';
+import React from 'react'
+import { StyleSheet, View, Text } from 'react-native'
+import MissionCounter from './components/MissionCounter'
+import BackgroundImage from './components/BackgroundImage'
+import MissionExecution from './components/MissionExecution'
 import VoteCounter from './components/VoteCounter'
 import SelectPlayers from './components/SelectPlayers'
 import store from './store/index'
@@ -35,6 +36,8 @@ export default class App extends React.Component {
       return <View style={styles.container}><BackgroundImage/><SelectPlayers/></View>
     }
 
+    if (store.status == "waiting") return <MissionExecution />
+
     return (
       <View style={styles.container}>
         <BackgroundImage />
@@ -47,6 +50,6 @@ export default class App extends React.Component {
 
         <VoteCounter />
       </View>
-    );
+    )
   }
 }

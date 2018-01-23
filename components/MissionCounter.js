@@ -1,7 +1,6 @@
 import React from 'react';
 import store from '../store/index'
 import { observer } from 'mobx-react'
-import MissionExecution from './MissionExecution'
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -34,7 +33,6 @@ export default class MissionCounter extends React.Component {
 
  render()  {
   const { count } = this.props
-  if (store.status == "waiting") return <MissionExecution />
 
   return (
     <TouchableOpacity

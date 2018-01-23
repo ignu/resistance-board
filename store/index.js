@@ -35,6 +35,12 @@ class Store {
 
   startMission = () => {
     this.status = "waiting"
+    this.missionVotes.push([])
+  }
+
+  playCard = (missionCard) => {
+    this.missionVotes[0].push(missionCard)
+    this.status = "voting"
   }
 
   @computed get rounds () {
