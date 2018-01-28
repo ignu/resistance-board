@@ -1,4 +1,5 @@
 import { observable, computed } from 'mobx'
+import R from 'ramda'
 
 const playerCounts = {
   "5" : {
@@ -33,14 +34,37 @@ class Store {
   @observable missionVotes = []
   @observable status = "voting"
 
+  reset = () => {
+    this.numberOfPlayers = undefined
+    this.voteCount = 0
+    this.missionVotes = []
+    this.status = "voting"
+  }
+
   startMission = () => {
+    if (!this.numberOfPlayers) {
+      throw(new Error("Player Count Must be Set"))
+    }
+
     this.status = "waiting"
     this.missionVotes.push([])
   }
 
+  checkForMissionEnd = () => {
+    const currentVotes = R.last(this.missionVotes).length
+    if (this.roundCount == currentVotes) {
+      this.status = "voting"
+    }
+  }
+
   playCard = (missionCard) => {
     this.missionVotes[0].push(missionCard)
-    this.status = "voting"
+    this.checkForMissionEnd()
+  }
+
+  @computed get roundCount () {
+    const index = this.missionVotes.length -1
+    return this.rounds[index]
   }
 
   @computed get rounds () {
