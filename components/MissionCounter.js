@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
   },
   text: {
     padding: 20,
-    color: '#fff',
     fontSize: 40,
     fontWeight: 'bold',
     textShadowColor: "#449",
@@ -22,6 +21,17 @@ const styles = StyleSheet.create({
     textShadowOffset: { height: 1, width: 1 },
     margin: 20
   },
+  activeText: {
+    color: '#fff',
+  },
+  disabledText: {
+    color: 'rgba(199, 199, 199, 0.5)',
+  },
+  disabled: {
+    backgroundColor: 'rgba(3, 3, 3, 0.1)',
+  },
+  active: {
+  }
 });
 
 @observer
@@ -32,14 +42,14 @@ export default class MissionCounter extends React.Component {
   }
 
  render()  {
-  const { count } = this.props
+  const { count, status } = this.props
 
   return (
     <TouchableOpacity
       onPress={store.startMission}
-      style={styles.button}
+      style={[styles.button, styles[status]]}
     >
-      <Text style={styles.text}>{Math.abs(count)}</Text>
+      <Text style={[styles.text, styles[`${status}Text`]]}>{Math.abs(count)}</Text>
     </TouchableOpacity>
   )
  }

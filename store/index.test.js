@@ -37,13 +37,25 @@ describe("startMission", () => {
 describe("playCard", () => {
   beforeEach(store.reset)
 
-  it("changesStatusFromWaiting", () => {
+  it("adds votes until the mission end", () => {
     store.numberOfPlayers = 5
     store.startMission()
     store.playCard(true)
     expect(store.status).toEqual("waiting")
     store.playCard(true)
-    expect(store.status).toEqual("voting")
+    expect(store.status).toEqual("tallying")
   });
 });
 
+
+describe("nextRound", () => {
+  store.numberOfPlayers = 5
+  store.startMission()
+  store.playCard(true)
+  store.playCard(true)
+
+  store.nextRound()
+
+  expect(store.status).toEqual("voting")
+  expect(store.roundCount).toEqual(2)
+})

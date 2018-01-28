@@ -36,7 +36,16 @@ export default class App extends React.Component {
       return <View style={styles.container}><BackgroundImage/><SelectPlayers/></View>
     }
 
+    const getStatus = (i) => {
+      if (i > store.roundCount) {
+        return "disabled"
+      }
+
+      return "active"
+    }
+
     if (store.status == "waiting") return <MissionExecution />
+      //if (store.status == "tallying") return <MissionTally />
 
     return (
       <View style={styles.container}>
@@ -45,7 +54,7 @@ export default class App extends React.Component {
         <View><Text style={styles.spyCount}>{store.numberOfPlayers} Players | {store.spies} Spies</Text></View>
 
         <View style={styles.missionRow}>
-          { store.rounds.map((i, y) => <MissionCounter key={ `mission${y}` } count={i}/>) }
+          { store.rounds.map((i, index) => <MissionCounter key={ `mission${index}` } count={i} status={getStatus(index)} />) }
         </View>
 
         <VoteCounter />

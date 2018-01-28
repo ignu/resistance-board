@@ -52,8 +52,10 @@ class Store {
 
   checkForMissionEnd = () => {
     const currentVotes = R.last(this.missionVotes).length
-    if (this.roundCount == currentVotes) {
-      this.status = "voting"
+
+    if (this.currentVotesRequired == currentVotes) {
+      this.status = "tallying"
+      this.missionVotes.push([])
     }
   }
 
@@ -62,9 +64,16 @@ class Store {
     this.checkForMissionEnd()
   }
 
+  nextRound = () => {
+    this.status = "voting"
+  }
+
+  @computed get currentVotesRequired () {
+    return this.rounds[this.roundCount - 1]
+  }
+
   @computed get roundCount () {
-    const index = this.missionVotes.length -1
-    return this.rounds[index]
+    return this.missionVotes.length
   }
 
   @computed get rounds () {
