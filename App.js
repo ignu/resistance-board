@@ -37,7 +37,7 @@ export default class App extends React.Component {
     }
 
     const getStatus = (i) => {
-      if (i > store.roundCount) {
+      if (i >= store.roundCount) {
         return "disabled"
       }
 

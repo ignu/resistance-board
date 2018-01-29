@@ -31,7 +31,7 @@ const playerCounts = {
 class Store {
   @observable numberOfPlayers
   @observable voteCount = 0
-  @observable missionVotes = []
+  @observable missionVotes = [[]]
   @observable status = "voting"
 
   reset = () => {
@@ -47,7 +47,6 @@ class Store {
     }
 
     this.status = "waiting"
-    this.missionVotes.push([])
   }
 
   checkForMissionEnd = () => {

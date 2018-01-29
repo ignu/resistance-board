@@ -51,6 +51,7 @@ describe("playCard", () => {
 describe("nextRound", () => {
   store.numberOfPlayers = 5
   store.startMission()
+  expect(store.roundCount).toEqual(1)
   store.playCard(true)
   store.playCard(true)
 
