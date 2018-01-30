@@ -49,14 +49,16 @@ describe("playCard", () => {
 
 
 describe("nextRound", () => {
-  store.numberOfPlayers = 5
-  store.startMission()
-  expect(store.roundCount).toEqual(1)
-  store.playCard(true)
-  store.playCard(true)
+  it("creates a new round", () => {
+    store.numberOfPlayers = 5
+    store.startMission()
+    expect(store.roundCount).toEqual(1)
+    store.playCard(true)
+    store.playCard(true)
 
-  store.nextRound()
+    store.nextRound()
 
-  expect(store.status).toEqual("voting")
-  expect(store.roundCount).toEqual(2)
+    expect(store.status).toEqual("voting")
+    expect(store.roundCount).toEqual(2)
+  })
 })

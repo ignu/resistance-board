@@ -31,6 +31,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(3, 3, 3, 0.1)',
   },
   active: {
+  },
+  fail: {
+    backgroundColor: 'rgba(99, 3, 3, 0.5)',
+  },
+  pass: {
+    backgroundColor: 'rgba(3, 99, 3, 0.5)',
   }
 });
 

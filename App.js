@@ -8,6 +8,7 @@ import MissionTally from './components/MissionTally'
 import SelectPlayers from './components/SelectPlayers'
 import store from './store/index'
 import { observer } from 'mobx-react'
+import { any, identity } from 'ramda'
 
 const styles = StyleSheet.create({
   container: {
@@ -16,7 +17,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'rgba(0,0,0,0)'
   },
-
   missionRow: {
     flex: 1,
     flexDirection: 'row',
@@ -38,11 +38,11 @@ export default class App extends React.Component {
     }
 
     const getStatus = (i) => {
-      if (i >= store.roundCount) {
-        return "disabled"
-      }
+      const count = i+1
+      if (count > store.roundCount) return "disabled"
+      if (count == store.roundCount) return "active"
 
-      return "active"
+      return any(identity, store.missionVotes[i]) : "pass" : "fail"
     }
 
     if (store.status == "waiting") return <MissionExecution />

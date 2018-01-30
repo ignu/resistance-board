@@ -58,7 +58,7 @@ class Store {
   }
 
   playCard = (missionCard) => {
-    this.missionVotes[0].push(missionCard)
+    this.missionVotes[this.roundCount - 1].push(missionCard)
     this.checkForMissionEnd()
   }
 
