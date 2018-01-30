@@ -3,17 +3,21 @@ import store from '../store/index'
 import { observer } from 'mobx-react'
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 
+import BackgroundImage from './BackgroundImage'
+
 const styles = StyleSheet.create({
   continue: {
-    flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(3, 90, 3, 0.5)',
-    height: 90,
+    height: 60,
     width: 140,
     borderRadius: 25
   },
   container: {
-    padding: 20,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   pass: {
     color: 'rgba(9, 99, 9, 0.5)',
@@ -45,7 +49,8 @@ export default class MissionTally extends React.Component {
 
     return(
       <View style={styles.container}>
-        <Text style={styles.text}>Mission Results for {store.roundCount}</Text>
+        <BackgroundImage/>
+        <Text style={styles.text}>Mission Results for Mission #{store.roundCount}</Text>
 
         { votes.map((vote, i) => <MissionVote key={`vote${i}`} vote={vote}/>) }
 
