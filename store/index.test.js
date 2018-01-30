@@ -49,6 +49,8 @@ describe("playCard", () => {
 
 
 describe("nextRound", () => {
+  beforeEach(store.reset)
+
   it("creates a new round", () => {
     store.numberOfPlayers = 5
     store.startMission()

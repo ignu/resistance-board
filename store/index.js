@@ -37,7 +37,7 @@ class Store {
   reset = () => {
     this.numberOfPlayers = undefined
     this.voteCount = 0
-    this.missionVotes = []
+    this.missionVotes = [[]]
     this.status = "voting"
   }
 
