@@ -4,6 +4,7 @@ import MissionCounter from './components/MissionCounter'
 import BackgroundImage from './components/BackgroundImage'
 import MissionExecution from './components/MissionExecution'
 import VoteCounter from './components/VoteCounter'
+import MissionTally from './components/MissionTally'
 import SelectPlayers from './components/SelectPlayers'
 import store from './store/index'
 import { observer } from 'mobx-react'
@@ -45,7 +46,7 @@ export default class App extends React.Component {
     }
 
     if (store.status == "waiting") return <MissionExecution />
-      //if (store.status == "tallying") return <MissionTally />
+    if (store.status == "tallying") return <MissionTally />
 
     return (
       <View style={styles.container}>

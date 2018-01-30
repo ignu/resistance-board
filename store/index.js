@@ -54,7 +54,6 @@ class Store {
 
     if (this.currentVotesRequired == currentVotes) {
       this.status = "tallying"
-      this.missionVotes.push([])
     }
   }
 
@@ -65,6 +64,7 @@ class Store {
 
   nextRound = () => {
     this.status = "voting"
+    this.missionVotes.push([])
   }
 
   @computed get currentVotesRequired () {
