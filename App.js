@@ -42,7 +42,7 @@ export default class App extends React.Component {
       if (count > store.roundCount) return "disabled"
       if (count == store.roundCount) return "active"
 
-      return any(identity, store.missionVotes[i]) : "pass" : "fail"
+      return any(identity, store.missionVotes[i]) ? "pass" : "fail"
     }
 
     if (store.status == "waiting") return <MissionExecution />
