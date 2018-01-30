@@ -5,7 +5,7 @@ import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
   continue: {
-    marginRight: 20,
+    flex: 1,
     justifyContent: 'center',
     backgroundColor: 'rgba(3, 90, 3, 0.5)',
     height: 90,
@@ -14,15 +14,27 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 20,
+  },
+  pass: {
+    color: 'rgba(9, 99, 9, 0.5)',
+  },
+  fail: {
+    color: 'rgba(99, 9, 9, 0.5)',
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold'
   }
 });
 
 const MissionVote = ({vote}) => {
   const text = vote ? "Pass" : "Fail"
+  const voteStyle = vote ? styles.pass : styles.fail
+  const style = [styles.text, voteStyle]
 
   return(
-    <View>
-      <Text>{ text }</Text>
+    <View style={{padding: 10}}>
+      <Text style={style}>{ text }</Text>
     </View>
   )
 }
@@ -33,12 +45,12 @@ export default class MissionTally extends React.Component {
 
     return(
       <View style={styles.container}>
-        <Text>Mission Results for {store.roundCount}</Text>
+        <Text style={styles.text}>Mission Results for {store.roundCount}</Text>
 
         { votes.map((vote, i) => <MissionVote key={`vote${i}`} vote={vote}/>) }
 
         <TouchableOpacity onPress={store.nextRound} style={styles.continue}>
-          <Text>Next Round</Text>
+          <Text style={styles.text}>Next Round</Text>
         </TouchableOpacity>
       </View>
     )

@@ -15,7 +15,16 @@ const styles = StyleSheet.create({
   text: {
     color: "#999",
     fontSize: 30
-  }
+  },
+  button: {
+    padding: 20
+  },
+  pass: {
+    color: 'rgba(0, 99, 0, 0.9)'
+  },
+  fail: {
+    color: 'rgba(99, 0, 0, 0.9)'
+  },
 });
 
 const MissionExecution = ({count}) => {
@@ -24,12 +33,12 @@ const MissionExecution = ({count}) => {
       style={styles.container}
     >
       <Text style={styles.text}>Perform Mission</Text>
-      <TouchableOpacity onPress={() => store.playCard(true)}>
-        <Text style={styles.text}>Pass</Text>
+      <TouchableOpacity style={[styles.button]} onPress={() => store.playCard(true)}>
+        <Text style={[styles.text, styles.pass]}>Pass</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => store.playCard(false)}>
-        <Text style={styles.text}>Fail</Text>
+      <TouchableOpacity style={[styles.button]} onPress={() => store.playCard(false)}>
+        <Text style={[styles.text, styles.fail]}>Fail</Text>
       </TouchableOpacity>
     </View>
   )
