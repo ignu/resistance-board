@@ -32,20 +32,54 @@ const styles = StyleSheet.create({
   },
 });
 
-const MissionExecution = ({count}) => {
-  return (
-    <View style={styles.container} >
-      <BackgroundImage resiveMode={"contain"} image={image} opacity={0.5}/>
-      <Text style={styles.text}>Perform Mission</Text>
-      <TouchableOpacity style={[styles.button]} onPress={() => store.playCard(true)}>
-        <Text style={[styles.text, styles.pass]}>Pass</Text>
-      </TouchableOpacity>
+class MissionExecution extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      ready: false,
+      message: "Pass to first player"
+    }
+  }
 
-      <TouchableOpacity style={[styles.button]} onPress={() => store.playCard(false)}>
-        <Text style={[styles.text, styles.fail]}>Fail</Text>
-      </TouchableOpacity>
-    </View>
-  )
+  getReady = () => this.setState({ready: true})
+  playCard = (card) => {
+    store.playCard(card)
+
+    this.setState({
+      ready: false,
+      message: "Vote Recorded. Pass to next player."
+    })
+  }
+
+  render() {
+    this.playCard.bind(this)
+
+    if (!this.state.ready) {
+      return(
+        <View style={styles.container} >
+          <TouchableOpacity style={[styles.button]} onPress={this.getReady.bind(this)}>
+
+            <Text style={[styles.text]}>{this.state.message}</Text>
+
+            <Text style={[styles.text, styles.pass]}>Ready?</Text>
+          </TouchableOpacity>
+        </View>
+      )
+    }
+    return (
+      <View style={styles.container} >
+        <BackgroundImage resiveMode={"contain"} image={image} opacity={0.5}/>
+        <Text style={styles.text}>Perform Mission</Text>
+        <TouchableOpacity style={[styles.button]} onPress={() => this.playCard(true)}>
+          <Text style={[styles.text, styles.pass]}>Pass</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={[styles.button]} onPress={() => this.playCard(false)}>
+          <Text style={[styles.text, styles.fail]}>Fail</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
 }
 
 export default MissionExecution
