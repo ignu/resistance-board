@@ -63,4 +63,13 @@ describe("nextRound", () => {
     expect(store.status).toEqual("voting")
     expect(store.roundCount).toEqual(2)
   })
+
+  it("updates the voteCount", () => {
+    store.numberOfPlayers = 5
+    store.voteCount = 5
+
+    store.nextRound()
+
+    expect(store.voteCount).toEqual(0);
+  })
 })

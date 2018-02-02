@@ -65,6 +65,7 @@ class Store {
   nextRound = () => {
     this.status = "voting"
     this.missionVotes.push([])
+    this.voteCount=0
   }
 
   @computed get currentVotesRequired () {
