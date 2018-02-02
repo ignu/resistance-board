@@ -1,9 +1,9 @@
 import React from 'react';
 import { Image, View } from 'react-native';
 
-const image = require('../resources/background.jpg');
+const defaultImage = require('../resources/background.jpg');
 
-const BackgroundImage = () => {
+const BackgroundImage = ({image, opacity, resizeMode}) => {
   return (
     <View
       style={{
@@ -17,9 +17,10 @@ const BackgroundImage = () => {
       <Image
         style={{
           flex: 1,
-          resizeMode: 'cover'
+          opacity: (opacity || 1),
+          resizeMode: (resizeMode || 'cover')
         }}
-        source={image}
+        source={image || defaultImage}
       />
     </View>
   )

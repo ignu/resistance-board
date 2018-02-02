@@ -1,9 +1,13 @@
 import React from 'react';
 import store from '../store/index'
+import BackgroundImage from './BackgroundImage';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+
+const image = require('../resources/dystopian.jpg');
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     top: 0,
     left: 0,
     position: 'absolute',
@@ -14,7 +18,8 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#999",
-    fontSize: 30
+    fontSize: 30,
+    backgroundColor: 'rgba(0, 0, 0, 0)'
   },
   button: {
     padding: 20
@@ -29,9 +34,8 @@ const styles = StyleSheet.create({
 
 const MissionExecution = ({count}) => {
   return (
-    <View
-      style={styles.container}
-    >
+    <View style={styles.container} >
+      <BackgroundImage resiveMode={"contain"} image={image} opacity={0.5}/>
       <Text style={styles.text}>Perform Mission</Text>
       <TouchableOpacity style={[styles.button]} onPress={() => store.playCard(true)}>
         <Text style={[styles.text, styles.pass]}>Pass</Text>
