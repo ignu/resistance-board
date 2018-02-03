@@ -44,6 +44,26 @@ const MissionVote = ({vote}) => {
   )
 }
 
+const shuffle = (originalArray) => {
+  let array = originalArray.slice(0)
+  let currentIndex = array.length
+  let temporaryValue
+  let randomIndex
+
+  while(0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex)
+    console.log("🤔randomIndex", randomIndex);
+
+    currentIndex -= 1
+
+    temporaryValue = array[currentIndex]
+    array[currentIndex] = array[randomIndex]
+    array[randomIndex] = temporaryValue
+  }
+
+  return array
+}
+
 export default class MissionTally extends React.Component {
   render() {
     const votes = store.missionVotes[store.roundCount - 1]
@@ -51,13 +71,14 @@ export default class MissionTally extends React.Component {
     return(
       <View style={styles.container}>
         <BackgroundImage/>
+
         <Text style={styles.text}>Mission Results for Mission #{store.roundCount}</Text>
 
-        { votes.map((vote, i) => <MissionVote key={`vote${i}`} vote={vote}/>) }
+        { shuffle(votes).map((vote, i) => <MissionVote key={`vote${i}`} vote={vote}/>) }
 
         <TouchableOpacity onPress={store.nextRound} style={styles.continue}>
           <Text style={styles.text}>Next Round</Text>
-        </TouchableOpacity
+        </TouchableOpacity>
       </View>
     )
   }
