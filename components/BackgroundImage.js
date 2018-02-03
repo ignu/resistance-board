@@ -17,6 +17,8 @@ const BackgroundImage = ({image, opacity, resizeMode}) => {
       <Image
         style={{
           flex: 1,
+          width: null,
+          height: null,
           opacity: (opacity || 1),
           resizeMode: (resizeMode || 'cover')
         }}

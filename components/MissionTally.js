@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    backgroundColor: 'rgba(9, 9, 9, 0)',
   }
 });
 
@@ -56,7 +57,7 @@ export default class MissionTally extends React.Component {
 
         <TouchableOpacity onPress={store.nextRound} style={styles.continue}>
           <Text style={styles.text}>Next Round</Text>
-        </TouchableOpacity>
+        </TouchableOpacity
       </View>
     )
   }

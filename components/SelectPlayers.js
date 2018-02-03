@@ -16,8 +16,12 @@ const styles = {
     padding: 10
   },
   playerText: {
-    fontSize: 20,
-    color: '#ccc'
+    fontSize: 29,
+    color: '#eee',
+    shadowColor: '#F00',
+    shadowOffset: { width: 555, height: 100 },
+    shadowRadius: 10,
+    shadowOpacity: 0.5
   }
 }
 

@@ -4,6 +4,7 @@ import BackgroundImage from './BackgroundImage';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 
 const image = require('../resources/dystopian.jpg');
+const ready = require('../resources/ready.png');
 
 const styles = StyleSheet.create({
   container: {
@@ -57,6 +58,7 @@ class MissionExecution extends React.Component {
     if (!this.state.ready) {
       return(
         <View style={styles.container} >
+          <BackgroundImage resizeMode="repeat" image={ready} opacity={0.5}/>
           <TouchableOpacity style={[styles.button]} onPress={this.getReady.bind(this)}>
 
             <Text style={[styles.text]}>{this.state.message}</Text>
@@ -68,7 +70,7 @@ class MissionExecution extends React.Component {
     }
     return (
       <View style={styles.container} >
-        <BackgroundImage resiveMode={"contain"} image={image} opacity={0.5}/>
+        <BackgroundImage resizeMode={"repeat"} image={image} opacity={0.5}/>
         <Text style={styles.text}>Perform Mission</Text>
         <TouchableOpacity style={[styles.button]} onPress={() => this.playCard(true)}>
           <Text style={[styles.text, styles.pass]}>Pass</Text>
