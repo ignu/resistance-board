@@ -25,8 +25,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'rgba(0,0,0,0)'
   },
+  counts: {
+    margin: 5
+  },
   spyCount: {
-    color: "#fff"
+    color: "rgba(2, 2, 2, 0.4)"
   }
 });
 
@@ -52,7 +55,7 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <BackgroundImage />
 
-        <View><Text style={styles.spyCount}>{store.numberOfPlayers} Players | {store.spies} Spies</Text></View>
+        <View style={styles.counts}><Text style={styles.spyCount}>{store.numberOfPlayers} Players | {store.spies} Spies</Text></View>
 
         <View style={styles.missionRow}>
           { store.rounds.map((i, index) => <MissionCounter key={ `mission${index}` } count={i} status={getStatus(index)} />) }

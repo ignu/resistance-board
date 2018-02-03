@@ -10,6 +10,7 @@ const style = {
     flexDirection: 'row',
     alignItems: 'flex-end',
     padding: 10,
+    marginLeft: 40,
     top: 0,
     left: 0,
     width: '20%',
