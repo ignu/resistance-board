@@ -1,5 +1,5 @@
 import { observable, computed } from 'mobx'
-import R from 'ramda'
+import { all, identity, last } from 'ramda'
 
 const playerCounts = {
   "5" : {
@@ -41,6 +41,16 @@ class Store {
     this.status = "voting"
   }
 
+  getStatus = (i) => {
+    const count = i + 1
+
+    if (count > this.roundCount) return "disabled"
+    if (count == this.roundCount) return "active"
+
+    return all(identity, this.missionVotes[i]) ? "pass" : "fail"
+  }
+
+
   startMission = () => {
     if (!this.numberOfPlayers) {
       throw(new Error("Player Count Must be Set"))
@@ -50,7 +60,7 @@ class Store {
   }
 
   checkForMissionEnd = () => {
-    const currentVotes = R.last(this.missionVotes).length
+    const currentVotes = last(this.missionVotes).length
 
     if (this.currentVotesRequired == currentVotes) {
       this.status = "tallying"

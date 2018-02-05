@@ -33,17 +33,17 @@ const styles = StyleSheet.create({
   active: {
   },
   fail: {
-    backgroundColor: 'rgba(99, 3, 3, 0.5)',
+    backgroundColor: 'rgba(99, 3, 3, 0.7)',
   },
   pass: {
-    backgroundColor: 'rgba(3, 99, 3, 0.5)',
+    backgroundColor: 'rgba(3, 99, 3, 0.7)',
   }
 });
 
 @observer
 export default class MissionCounter extends React.Component {
   constructor(props) {
-    super()
+    super(props)
     this.props = props
   }
 

@@ -8,7 +8,6 @@ import MissionTally from './components/MissionTally'
 import SelectPlayers from './components/SelectPlayers'
 import store from './store/index'
 import { observer } from 'mobx-react'
-import { all, identity } from 'ramda'
 
 const styles = StyleSheet.create({
   container: {
@@ -26,9 +25,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)'
   },
   counts: {
-    margin: 5
+    margin: 5,
+    marginTop: 10
   },
   spyCount: {
+    fontWeight: 'bold',
+    fontSize: 16,
     color: "rgba(2, 2, 2, 0.4)"
   }
 });
@@ -38,14 +40,6 @@ export default class App extends React.Component {
   render() {
     if (!store.numberOfPlayers) {
       return <View style={styles.container}><BackgroundImage/><SelectPlayers/></View>
-    }
-
-    const getStatus = (i) => {
-      const count = i+1
-      if (count > store.roundCount) return "disabled"
-      if (count == store.roundCount) return "active"
-
-      return all(identity, store.missionVotes[i]) ? "pass" : "fail"
     }
 
     if (store.status == "waiting") return <MissionExecution />
@@ -58,7 +52,7 @@ export default class App extends React.Component {
         <View style={styles.counts}><Text style={styles.spyCount}>{store.numberOfPlayers} Players | {store.spies} Spies</Text></View>
 
         <View style={styles.missionRow}>
-          { store.rounds.map((i, index) => <MissionCounter key={ `mission${index}` } count={i} status={getStatus(index)} />) }
+          { store.rounds.map((i, index) => <MissionCounter key={ `mission${index}` } count={i} status={store.getStatus(index)} />) }
         </View>
 
         <VoteCounter />

@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'rgba(3, 90, 3, 0.5)',
     height: 60,
-    width: 140,
+    width: 190,
     borderRadius: 25
   },
   container: {
@@ -20,13 +20,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   pass: {
-    color: 'rgba(9, 99, 9, 0.5)',
+    color: 'rgba(9, 99, 9, 0.7)',
   },
   fail: {
-    color: 'rgba(99, 9, 9, 0.5)',
+    color: 'rgba(99, 9, 9, 0.7)'
   },
   text: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
     backgroundColor: 'rgba(9, 9, 9, 0)',
   }
@@ -52,7 +52,6 @@ const shuffle = (originalArray) => {
 
   while(0 !== currentIndex) {
     randomIndex = Math.floor(Math.random() * currentIndex)
-    console.log("🤔randomIndex", randomIndex);
 
     currentIndex -= 1
 

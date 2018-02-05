@@ -9,6 +9,7 @@ const ready = require('../resources/ready.png');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
     top: 0,
     left: 0,
     position: 'absolute',
@@ -19,8 +20,17 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#999",
+    textAlign: 'center',
     fontSize: 30,
     backgroundColor: 'rgba(0, 0, 0, 0)'
+  },
+  h1: {
+    fontSize: 45,
+    fontWeight: 'bold'
+  },
+  h1: {
+    fontSize: 38,
+    fontWeight: 'bold'
   },
   button: {
     padding: 20,
@@ -62,9 +72,9 @@ class MissionExecution extends React.Component {
     if (!this.state.ready) {
       return(
         <View style={styles.container} >
-          <BackgroundImage resizeMode="repeat" image={ready} opacity={0.5}/>
+          <BackgroundImage resizeMode="repeat" image={ready} opacity={0.15}/>
 
-            <Text style={[styles.text]}>{this.state.message}</Text>
+            <Text style={[styles.text, styles.h1]}>{this.state.message}</Text>
 
           <TouchableOpacity style={[styles.button]} onPress={this.getReady.bind(this)}>
             <Text style={[styles.text, styles.pass]}>Ready?</Text>
@@ -74,8 +84,11 @@ class MissionExecution extends React.Component {
     }
     return (
       <View style={styles.container} >
-        <BackgroundImage resizeMode={"repeat"} image={image} opacity={0.5}/>
-        <Text style={styles.text}>Perform Mission</Text>
+
+        <BackgroundImage resizeMode="repeat" image={image} opacity={0.4}/>
+
+        <Text style={[styles.text, styles.h1]}>Perform Mission</Text>
+
         <TouchableOpacity style={[styles.button]} onPress={() => this.playCard(true)}>
           <Text style={[styles.text, styles.pass]}>Pass</Text>
         </TouchableOpacity>
@@ -83,6 +96,8 @@ class MissionExecution extends React.Component {
         <TouchableOpacity style={[styles.button]} onPress={() => this.playCard(false)}>
           <Text style={[styles.text, styles.fail]}>Fail</Text>
         </TouchableOpacity>
+
+        <Text style={[styles.text, styles.h2]}>(If you are Resistance you *must* press "Pass")</Text>
       </View>
     )
   }
