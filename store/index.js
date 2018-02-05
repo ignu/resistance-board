@@ -1,5 +1,5 @@
 import { observable, computed } from 'mobx'
-import { all, identity, last } from 'ramda'
+import { all, filter, identity, last } from 'ramda'
 
 const playerCounts = {
   "5" : {
@@ -41,15 +41,25 @@ class Store {
     this.status = "voting"
   }
 
+  failFunc = (checkRound) => {
+    if (checkRound != 4 || this.numberOfPlayers < 7) {
+      return all(identity)
+    }
+
+    return (arr) => {
+      const y = filter((x) => !x, arr).length
+      return filter((x) => !x, arr).length < 2
+    }
+  }
+
   getStatus = (i) => {
     const count = i + 1
 
     if (count > this.roundCount) return "disabled"
     if (count == this.roundCount) return "active"
 
-    return all(identity, this.missionVotes[i]) ? "pass" : "fail"
+    return this.failFunc(count)(this.missionVotes[i]) ? "pass" : "fail"
   }
-
 
   startMission = () => {
     if (!this.numberOfPlayers) {

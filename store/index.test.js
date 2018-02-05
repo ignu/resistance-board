@@ -47,6 +47,45 @@ describe("playCard", () => {
   });
 });
 
+describe("getStatus", () => {
+  beforeEach(store.reset)
+
+  const setVotes = (array) => {
+    array.forEach((round) => {
+      round.forEach(store.playCard)
+      store.nextRound()
+    })
+  }
+
+  it("returns pass when all votes are passing", () => {
+    store.numberOfPlayers = 5
+    setVotes([[true, true]])
+    expect(store.getStatus(0)).toEqual("pass")
+  });
+
+  it("returns fail when any vote is failing", () => {
+    store.numberOfPlayers = 5
+    setVotes([[true, false]])
+    expect(store.getStatus(0)).toEqual("fail")
+  });
+
+  describe("with > 6 players", () => {
+    beforeEach(store.reset)
+
+    it("passes with one fail for mission four", () => {
+      store.numberOfPlayers = 7
+      setVotes([[], [], [], [true, false, true]])
+      expect(store.getStatus(3)).toEqual("pass")
+    })
+
+    it("fails with two fails for mission four", () => {
+      store.numberOfPlayers = 7
+      setVotes([[], [], [], [false, false, true]])
+      expect(store.getStatus(3)).toEqual("fail")
+    })
+  })
+});
+
 
 describe("nextRound", () => {
   beforeEach(store.reset)
