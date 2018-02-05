@@ -31,6 +31,9 @@ const style = {
   },
   finalVote: {
     backgroundColor: 'rgba(113, 3, 3, 0.3)',
+  },
+  finalVoteActive: {
+    backgroundColor: 'rgba(113, 3, 3, 1)',
   }
 }
 
@@ -50,6 +53,7 @@ export default class VoteCounter extends React.Component {
             if (i <= store.voteCount+1) { styles.push(style.completeVote) }
 
             if (i == 5) { styles.push(style.finalVote) }
+            if (i == 5 && store.voteCount >= 4) { styles.push(style.finalVoteActive) }
 
             return <View key={`vote${i}`} style={styles}/>
           })}

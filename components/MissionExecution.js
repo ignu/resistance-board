@@ -23,7 +23,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0)'
   },
   button: {
-    padding: 20
+    padding: 20,
+    margin: 20,
+    width: 150,
+    borderRadius: 100,
+    backgroundColor: 'rgba(200, 200, 200, 0.8)'
   },
   pass: {
     color: 'rgba(0, 99, 0, 0.9)'
@@ -59,10 +63,10 @@ class MissionExecution extends React.Component {
       return(
         <View style={styles.container} >
           <BackgroundImage resizeMode="repeat" image={ready} opacity={0.5}/>
-          <TouchableOpacity style={[styles.button]} onPress={this.getReady.bind(this)}>
 
             <Text style={[styles.text]}>{this.state.message}</Text>
 
+          <TouchableOpacity style={[styles.button]} onPress={this.getReady.bind(this)}>
             <Text style={[styles.text, styles.pass]}>Ready?</Text>
           </TouchableOpacity>
         </View>
