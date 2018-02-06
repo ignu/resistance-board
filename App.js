@@ -32,6 +32,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     color: "rgba(2, 2, 2, 0.4)"
+  },
+  twoRequired: {
+    fontWeight: 'bold',
+    fontSize: 26,
+    color: "rgba(159, 29, 29, 0.9)",
+    marginBottom: 20,
   }
 });
 
@@ -52,8 +58,10 @@ export default class App extends React.Component {
         <View style={styles.counts}><Text style={styles.spyCount}>{store.numberOfPlayers} Players | {store.spies} Spies</Text></View>
 
         <View style={styles.missionRow}>
-          { store.rounds.map((i, index) => <MissionCounter key={ `mission${index}` } count={i} status={store.getStatus(index)} />) }
+          { store.rounds.map((i, index) => <MissionCounter key={ `mission${index}` } index={index} count={i} status={store.getStatus(index)} />) }
         </View>
+
+        <View><Text style={styles.twoRequired}>* Two Fails Required</Text></View>
 
         <VoteCounter />
       </View>

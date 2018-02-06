@@ -21,6 +21,9 @@ const styles = StyleSheet.create({
     textShadowOffset: { height: 1, width: 1 },
     margin: 20
   },
+  lessPadding: {
+    paddingRight: 0,
+  },
   activeText: {
     color: '#fff',
   },
@@ -37,8 +40,15 @@ const styles = StyleSheet.create({
   },
   pass: {
     backgroundColor: 'rgba(3, 99, 3, 0.7)',
+  },
+  twoRequired: {
+    color: "rgba(199, 99, 99, 0.6)",
   }
 });
+
+const twoRequired = (index) => {
+  return index == 3 && store.numberOfPlayers > 6
+}
 
 @observer
 export default class MissionCounter extends React.Component {
@@ -48,14 +58,21 @@ export default class MissionCounter extends React.Component {
   }
 
  render()  {
-  const { count, status } = this.props
+  const { count, status, index } = this.props
+  let textStyles = [styles.text, styles[`${status}Text`]]
+
+  if (twoRequired(index)) textStyles.push(styles.lessPadding)
 
   return (
     <TouchableOpacity
       onPress={store.startMission}
       style={[styles.button, styles[status]]}
     >
-      <Text style={[styles.text, styles[`${status}Text`]]}>{Math.abs(count)}</Text>
+      <Text style={textStyles}>
+        {count}
+
+        { twoRequired(index) && <Text style={styles.twoRequired}>*</Text>}
+      </Text>
     </TouchableOpacity>
   )
  }
